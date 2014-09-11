@@ -24,7 +24,9 @@ class Mailchimp_library
         $this->ci->load->config('mailchimp');
 
 		$this->api_key = $this->ci->config->item('api_key');
-		$this->api_endpoint = $this->ci->config->item('api_endpoint');
+		if(strlen(trim($this->ci->config->item('api_endpoint')))>0){
+            		$this->api_endpoint = $this->ci->config->item('api_endpoint');
+        	}
 
 		list(, $datacentre) = explode('-', $this->api_key);
 		$this->api_endpoint = str_replace('<dc>', $datacentre, $this->api_endpoint);
